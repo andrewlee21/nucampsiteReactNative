@@ -9,6 +9,7 @@ const mapStateToProps = state => {
         partners: state.partners
     };
 };
+const testvariable;
 
 
 function Mission() {
