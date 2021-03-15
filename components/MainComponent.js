@@ -12,23 +12,26 @@ import {
   ScrollView,
   Image,
 } from "react-native";
-import Reservation from './ReservationComponent';
+import Reservation from "./ReservationComponent";
 import { createStackNavigator } from "react-navigation-stack";
 import { createDrawerNavigator, DrawerItems } from "react-navigation-drawer";
 import { createAppContainer } from "react-navigation";
 import { Icon } from "react-native-elements";
 import SafeAreaView from "react-native-safe-area-view";
-import { connect } from 'react-redux';
-import { fetchCampsites, fetchComments, fetchPromotions,
-    fetchPartners } from '../redux/ActionCreators';
+import { connect } from "react-redux";
+import {
+  fetchCampsites,
+  fetchComments,
+  fetchPromotions,
+  fetchPartners,
+} from "../redux/ActionCreators";
 
 const mapDispatchToProps = {
-    fetchCampsites,
-    fetchComments,
-    fetchPromotions,
-    fetchPartners
+  fetchCampsites,
+  fetchComments,
+  fetchPromotions,
+  fetchPartners,
 };
-
 
 const DirectoryNavigator = createStackNavigator(
   {
@@ -138,33 +141,32 @@ const ReservationNavigator = createStackNavigator(
   }
 );
 
-
 const ContactNavigator = createStackNavigator(
-    {
-      Contact: { screen: Contact },
-    },
-    {
-      defaultNavigationOptions: ({ navigation }) => ({
-        headerStyle: {
-          backgroundColor: "#5637DD",
-        },
-        headerTintColor: "#fff",
-        headerTitleStyle: {
-          color: "#fff",
-          fontWeight: "bold",
-        },
-        headerLeft: (
-          <Icon
-            name="address-card"
-            type="font-awesome"
-            iconStyle={styles.stackIcon}
-            onPress={() => navigation.toggleDrawer()}
-          />
-        ),
-      }),
-    }
-  );
-  
+  {
+    Contact: { screen: Contact },
+  },
+  {
+    defaultNavigationOptions: ({ navigation }) => ({
+      headerStyle: {
+        backgroundColor: "#5637DD",
+      },
+      headerTintColor: "#fff",
+      headerTitleStyle: {
+        color: "#fff",
+        fontWeight: "bold",
+      },
+      headerLeft: (
+        <Icon
+          name="address-card"
+          type="font-awesome"
+          iconStyle={styles.stackIcon}
+          onPress={() => navigation.toggleDrawer()}
+        />
+      ),
+    }),
+  }
+);
+
 const CustomDrawerContentComponent = (props) => (
   <ScrollView>
     <SafeAreaView
@@ -206,14 +208,14 @@ const MainNavigator = createDrawerNavigator(
       },
     },
     Reservation: {
-        screen: ReservationNavigator,
-        navigationOptions: {
-            drawerLabel: 'Reserve Campsite',
-            drawerIcon: ({ tintColor }) => (
-            <Icon name="tree" type="font-awesome" size={24} color={tintColor} />
-          ),
-        },
+      screen: ReservationNavigator,
+      navigationOptions: {
+        drawerLabel: "Reserve Campsite",
+        drawerIcon: ({ tintColor }) => (
+          <Icon name="tree" type="font-awesome" size={24} color={tintColor} />
+        ),
       },
+    },
     About: {
       screen: AboutNavigator,
       navigationOptions: {
@@ -251,13 +253,12 @@ const MainNavigator = createDrawerNavigator(
 const AppNavigator = createAppContainer(MainNavigator);
 
 class Main extends Component {
-
-    componentDidMount() {
-        this.props.fetchCampsites();
-        this.props.fetchComments();
-        this.props.fetchPromotions();
-        this.props.fetchPartners();
-    }
+  componentDidMount() {
+    this.props.fetchCampsites();
+    this.props.fetchComments();
+    this.props.fetchPromotions();
+    this.props.fetchPartners();
+  }
 
   render() {
     return (
@@ -275,32 +276,32 @@ class Main extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    drawerHeader: {
-        backgroundColor: '#5637DD',
-        height: 140,
-        alignItems: 'center',
-        justifyContent: 'center',
-        flex: 1,
-        flexDirection: 'row'
-    },
-    drawerHeaderText: {
-        color: '#fff',
-        fontSize: 24,
-        fontWeight: 'bold'
-    },
-    drawerImage: {
-        margin: 10,
-        height: 60,
-        width: 60
-    },
-    stackIcon: {
-        marginLeft: 10,
-        color: '#fff',
-        fontSize: 24
-    }
+  container: {
+    flex: 1,
+  },
+  drawerHeader: {
+    backgroundColor: "#5637DD",
+    height: 140,
+    alignItems: "center",
+    justifyContent: "center",
+    flex: 1,
+    flexDirection: "row",
+  },
+  drawerHeaderText: {
+    color: "#fff",
+    fontSize: 24,
+    fontWeight: "bold",
+  },
+  drawerImage: {
+    margin: 10,
+    height: 60,
+    width: 60,
+  },
+  stackIcon: {
+    marginLeft: 10,
+    color: "#fff",
+    fontSize: 24,
+  },
 });
 
 export default connect(null, mapDispatchToProps)(Main);

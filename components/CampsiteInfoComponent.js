@@ -72,8 +72,8 @@ function RenderComments({ comments }) {
         <Text style={{ fontSize: 14 }}>{item.text}</Text>
         <Rating
          startingValue={item.rating}
-         imageSize= '10'
-         style={{alignItems: 'flex-start', paddingVertical: '5%'}}
+         imageSize= {10}
+         style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
          readonly
          />
         <Text
@@ -111,8 +111,8 @@ class CampsiteInfo extends Component {
   }
 
   handleComment(campsiteId) {
-    const {rating, author, text} = this.state
-    postComment(campsiteId, rating, author, text)
+    const {rating, author, text} = this.state;
+    this.props.postComment(campsiteId, rating, author, text);
     this.toggleModal();
   }
   resetForm() {
@@ -159,7 +159,7 @@ class CampsiteInfo extends Component {
             <Rating
               showRating
               startingValue={this.state.rating}
-              imageSize="40"
+              imageSize={40}
               onFinishRating={(rating) => this.setState({ rating: rating })}
               style={{ paddingVertical: 10 }}
             />
@@ -174,11 +174,11 @@ class CampsiteInfo extends Component {
               placeholder='Comment'
               leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
               leftIconContainerStyle={{paddingRight: 10}}
-              onChangeText= {(comment) => this.setState({ comment: comment })}
+              onChangeText= {(comment) => this.setState({ text: comment })}
               value = {this.state.text}
             />
             <View>
-              <Button title='submit'
+              <Button title='Submit'
               color='#5637DD'
               onPress={() => {
                 this.handleComment(campsiteId);
