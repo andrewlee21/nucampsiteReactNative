@@ -7,6 +7,8 @@ import { baseUrl } from "../shared/baseUrl";
 import { SwipeRow } from "react-native-swipe-list-view";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { deleteFavorite } from "../redux/ActionCreators";
+import * as Animatable from 'react-native-animatable';
+
 
 const mapStateToProps = (state) => {
   return {
@@ -34,7 +36,7 @@ class Favorites extends Component {
               style={styles.deleteTouchable}
               onPress={() => Alert.alert(
                   'Delete Favorite?',
-                  'Are you sure you wish to delete the favorite campsite' + item.name + '?',
+                  'Are you sure you wish to delete the favorite campsite ' + item.name + '?',
                   [
                       {
                           text: 'Cancel',
