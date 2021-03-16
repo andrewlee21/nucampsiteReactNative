@@ -61,6 +61,7 @@ function RenderCampsite(props) {
           { cancelable: false }
         );
       }
+      return true;
     },
   });
 
