@@ -12,9 +12,7 @@ import { Card, Icon, Input, Rating } from "react-native-elements";
 import { connect } from "react-redux";
 import { baseUrl } from "../shared/baseUrl";
 import { postFavorite, postComment } from "../redux/ActionCreators";
-import * as Animatable from 'react-native-animatable';
-
-
+import * as Animatable from "react-native-animatable";
 
 const mapStateToProps = (state) => {
   return {
@@ -26,7 +24,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   postFavorite: (campsiteId) => postFavorite(campsiteId),
-  postComment: (CampsiteId, rating, author, text) => postComment(CampsiteId, rating, author, text)
+  postComment: (CampsiteId, rating, author, text) =>
+    postComment(CampsiteId, rating, author, text),
 };
 
 function RenderCampsite(props) {
@@ -34,34 +33,36 @@ function RenderCampsite(props) {
 
   if (campsite) {
     return (
-      <Card
-        featuredTitle={campsite.name}
-        image={{ uri: baseUrl + campsite.image }}
-      >
-        <Text style={{ margin: 10 }}>{campsite.description}</Text>
-        <View style={styles.cardRow}>
-          <Icon
-            name={props.favorite ? "heart" : "heart-o"}
-            type="font-awesome"
-            color="#f50"
-            raised
-            reverse
-            onPress={() =>
-              props.favorite
-                ? console.log("Already set as a favorite")
-                : props.markFavorite()
-            }
-          />
-          <Icon
-            name="pencil"
-            type="font-awesome"
-            color="#5637dd"
-            raised
-            reverse
-            onPress={() => props.onShowModal()}
-          />
-        </View>
-      </Card>
+      <Animatable.View animation="fadeInDown" duration={2000} delay={1000}>
+        <Card
+          featuredTitle={campsite.name}
+          image={{ uri: baseUrl + campsite.image }}
+        >
+          <Text style={{ margin: 10 }}>{campsite.description}</Text>
+          <View style={styles.cardRow}>
+            <Icon
+              name={props.favorite ? "heart" : "heart-o"}
+              type="font-awesome"
+              color="#f50"
+              raised
+              reverse
+              onPress={() =>
+                props.favorite
+                  ? console.log("Already set as a favorite")
+                  : props.markFavorite()
+              }
+            />
+            <Icon
+              name="pencil"
+              type="font-awesome"
+              color="#5637dd"
+              raised
+              reverse
+              onPress={() => props.onShowModal()}
+            />
+          </View>
+        </Card>
+      </Animatable.View>
     );
   }
   return <View />;
@@ -73,11 +74,11 @@ function RenderComments({ comments }) {
       <View style={{ margin: 10 }}>
         <Text style={{ fontSize: 14 }}>{item.text}</Text>
         <Rating
-         startingValue={item.rating}
-         imageSize= {10}
-         style={{ alignItems: 'flex-start', paddingVertical: '5%' }}
-         readonly
-         />
+          startingValue={item.rating}
+          imageSize={10}
+          style={{ alignItems: "flex-start", paddingVertical: "5%" }}
+          readonly
+        />
         <Text
           style={{ fontSize: 12 }}
         >{`-- ${item.author}, ${item.date}`}</Text>
@@ -86,6 +87,7 @@ function RenderComments({ comments }) {
   };
 
   return (
+    <Animatable.View animation="fadeInUp" duration={2000} delay={1000}>
     <Card title="Comments">
       <FlatList
         data={comments}
@@ -93,6 +95,7 @@ function RenderComments({ comments }) {
         keyExtractor={(item) => item.id.toString()}
       />
     </Card>
+  </Animatable.View>
   );
 }
 
@@ -113,7 +116,7 @@ class CampsiteInfo extends Component {
   }
 
   handleComment(campsiteId) {
-    const {rating, author, text} = this.state;
+    const { rating, author, text } = this.state;
     this.props.postComment(campsiteId, rating, author, text);
     this.toggleModal();
   }
@@ -166,26 +169,27 @@ class CampsiteInfo extends Component {
               style={{ paddingVertical: 10 }}
             />
             <Input
-              placeholder='Author'
-              leftIcon={{ type: 'font-awesome', name: 'user-o' }}
-              leftIconContainerStyle={{paddingRight: 10}}
-              onChangeText= {(author) => this.setState({ author: author })}
-              value = {this.state.author}
+              placeholder="Author"
+              leftIcon={{ type: "font-awesome", name: "user-o" }}
+              leftIconContainerStyle={{ paddingRight: 10 }}
+              onChangeText={(author) => this.setState({ author: author })}
+              value={this.state.author}
             />
             <Input
-              placeholder='Comment'
-              leftIcon={{ type: 'font-awesome', name: 'comment-o' }}
-              leftIconContainerStyle={{paddingRight: 10}}
-              onChangeText= {(comment) => this.setState({ text: comment })}
-              value = {this.state.text}
+              placeholder="Comment"
+              leftIcon={{ type: "font-awesome", name: "comment-o" }}
+              leftIconContainerStyle={{ paddingRight: 10 }}
+              onChangeText={(comment) => this.setState({ text: comment })}
+              value={this.state.text}
             />
             <View>
-              <Button title='Submit'
-              color='#5637DD'
-              onPress={() => {
-                this.handleComment(campsiteId);
-                this.resetForm();
-              }}
+              <Button
+                title="Submit"
+                color="#5637DD"
+                onPress={() => {
+                  this.handleComment(campsiteId);
+                  this.resetForm();
+                }}
               />
             </View>
 

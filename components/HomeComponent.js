@@ -23,10 +23,10 @@ function RenderItem(props) {
         return (
             <View>
                 <Text>
-                    {props.errMess}</Text>
+                    {props.errMess}
+                </Text>
             </View>
             )
-
     }
   if (item) {
     return (
@@ -64,14 +64,13 @@ componentDidMount() {
     this.animate();
 }
 
-
   static navigationOptions = {
     title: "Home",
   };
 
   render() {
     return (
-      <Animated.ScrollView style={{transform: [{scale: this.state.scaleValue}], backgroundColor="#EEE" }}>
+      <Animated.ScrollView style={{transform: [{scale: this.state.scaleValue}], backgroundColor: "#EEE" }}>
         <RenderItem
                     item={this.props.campsites.campsites.filter(campsite => campsite.featured)[0]}
                     isLoading={this.props.campsites.isLoading}
