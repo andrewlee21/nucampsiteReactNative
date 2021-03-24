@@ -32,9 +32,7 @@ class Reservation extends Component {
     console.log(JSON.stringify(this.state));
     Alert.alert(
       "Begin Search?",
-      `Number of Campers: ${this.state.campers} \n
-           Hike In? ${this.state.hikeIn} \n
-           Date: ${this.state.date}`,
+      `Number of Campers: ${this.state.campers}\n\nHike In? ${this.state.hikeIn}\n\nDate: ${this.state.date}`,
       [
         {
           text: "Cancel",
